@@ -1,9 +1,16 @@
 services:
   nightingale:
-    image: ghcr.io/ekman/nightingale:1
-    restart: unless-stopped
-    read_only: true
-    volumes:
-      - "./game:/home/steam/game"
+    container_name: nightingale # Change this to whatever this makes it easier to find in $ docker -ps.
+    image: ghcr.io/ekman/nightingale:1 # The source.
+    read_only: true # Speeds up the boot process a little bit, since it's not pulling new data on each boot up good for debug but should be disabled when going into production.
+    restart: unless-stopped # Will keep restart itself on crash unless when $ docker compose down.
+    # network_mode: "host" # Uncomment this if you don't want to use -ports: below.
     ports:
-      - 7777:7777/udp
+      - 7778:7778/udp # Binds the games server to port 7778 and not the default port 7777.
+    volumes:
+      - "./game:/home/steam/game" # Mounts the location so it's accessible after $ docker compose up -d.
+    command: ["bash","-lc","/home/steam/game/NWXServer.sh -log -port=7778 -multiehome=0.0.0.0"] # uses bash to run the NWXServer.sh and pass in the flags of log and custom port and also multihome binds directly to host.
+    # 'lc' -l => Login shells thells bash to behave as if it were directly invoked as a login shell.
+    # 'lc' -c => Tells bash to read and execute the command string that immidiately follows it.
+    # '-multihome=0.0.0.0' => The value 0.0.0.0 tells the game server to bind to all available network interface on the machine (or in this case, container), this is needed if you use DHCP and the LAN ip is dynamically chaning.
+    # You can still keep it if you have reserved the LAN ip for the machine running the server, just to be sure.
