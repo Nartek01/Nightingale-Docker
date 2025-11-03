@@ -1,11 +1,11 @@
 # Forked from https://github.com/Ekman/Nightingale-Docker?tab=readme-ov-file
-The reason for this fork is because when I installed and got it partially running I couldn't connect to the server, turns out Satisfactory also runs on the default port of 7777, so with help of Ai I manage to come up with a solution that let's me redirect the port to something else
-in this case port '7778'. Remember that since it uses steamCMD it boot time is really slow so don't forget to $ docker logs -f nightingale (default container name), so you know if the software is in boot up process/verify process or if it truly crashed.
+The reason for this fork is because when I installed and got it partially running I couldn't connect to the server, turns out Satisfactory also runs on the default port of 7777, so with help of Ai I manage to come up with a solution that let's me redirect the port to something else in this case port '7778'.
 
-Step 1. Specify the port in the docker-compose.yml
-Step 2. Duplicate the ExampleServerSetting.ini to ServerSetting.ini and add -Port=7778
-Step 3. Start the server and look for "7778", it should state that the server launched successfully on port 7778 or that the server can launch on port 7778 since it's being used by another process or something similar.
+*Remember that since it uses steamCMD it boot time is really slow so don't forget to `$ docker logs -f nightingale` (default container name), so you know if the software is in boot up process/verify process or if it truly crashed.*
 
+ **- Step 1.** Specify the port in the docker-compose.yml
+ **- Step 2.** Duplicate the ExampleServerSetting.ini to ServerSetting.ini and add -Port=7778
+ **- Step 3.** Start the server and look for "7778", it should state that the server launched successfully on port 7778 or that the server can launch on port 7778 since it's being used by another process or something similar.
 # Nightingale Docker
 
 Run a [Nightingale](https://store.steampowered.com/app/1928980/Nightingale/) dedicated server using Docker. The purpose of this is solution is not to be complete, but rather a minimal way. I don't like over engineered solutions. [Information on how to host a dedicated server can be found on the developers hompage](https://playnightingale.com/dedicated-servers).
