@@ -4,7 +4,7 @@ The reason for this fork is because when I installed and got it partially runnin
 *Remember that since it uses steamCMD it boot time is really slow so don't forget to `$ docker logs -f nightingale` (default container name), so you know if the software is in boot up process/verify process or if it truly crashed.*
 
  **- Step 1.** Specify the port in the docker-compose.yml
- **- Step 2.** Duplicate the ExampleServerSetting.ini to ServerSetting.ini and add -Port=7778
+ **- Step 2.** Duplicate the ExampleServerSettings.ini to ServerSettings.ini and add -Port=7778
  **- Step 3.** Start the server and look for "7778", it should state that the server launched successfully on port 7778 or that the server can launch on port 7778 since it's being used by another process or something similar.
 # Nightingale Docker
 
@@ -24,7 +24,7 @@ View the [example `docker-compose.yml` file](docker-compose.yml) for indications
 
 ### Ports
 
-Open UDP port `7777` on your router and forward it to the hosting server/computer.
+Open UDP port `7778` or the desired port in docker-compose.yml on your router and forward it to the hosting server/computer. I also needed to ufw allow port 7778/udp in ubuntu.
 
 ### Volumes
 
@@ -47,6 +47,7 @@ Configure by editing an ini file.
 | `StartingDifficulty` | Starting map difficulty, choose from [easy, medium, hard, extreme] |
 | `Password` | Users must enter this password to enter your server |
 | `AdminPassword` | Grants access to the kick/ban commands. Leave empty to disable admin functionality |
+| `Port` | Specify the internal port, if you're running on anything that's not port 7777 **You must add this** |
 
 
 ### Updating the game files
